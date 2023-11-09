@@ -1,34 +1,34 @@
 class Node:
-    """Класс для узла стека"""
 
-    def __init__(self, data, next_node):
-        """
-        Конструктор класса Node
-
-        :param data: данные, которые будут храниться в узле
-        """
-        pass
+    def __init__(self, data, next_node=None):
+        self.data = data
+        self.next_node = next_node
 
 
 class Stack:
-    """Класс для стека"""
-
     def __init__(self):
-        """Конструктор класса Stack"""
-        pass
+        self.top = None
 
     def push(self, data):
-        """
-        Метод для добавления элемента на вершину стека
-
-        :param data: данные, которые будут добавлены на вершину стека
-        """
-        pass
+        new_node = Node(data)
+        new_node.next_node = self.top
+        self.top = new_node
 
     def pop(self):
-        """
-        Метод для удаления элемента с вершины стека и его возвращения
+        if self.top is None:
+            return None
+        else:
+            popped_node = self.top
+            self.top = self.top.next_node
+            return popped_node.data
 
-        :return: данные удаленного элемента
-        """
-        pass
+
+stack = Stack()
+stack.push('data1')
+stack.push('data2')
+stack.push('data3')
+print(stack.top.data)  # data3
+print(stack.top.next_node.data)  # data2
+print(stack.top.next_node.next_node.data)  # data1
+print(stack.top.next_node.next_node.next_node)  # None
+print(stack.top.next_node.next_node.next_node.data)  # AttributeError: 'NoneType' object has no attribute 'data'
